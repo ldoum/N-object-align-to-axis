@@ -4,7 +4,7 @@
 bl_info = {
     "name": "N Item line up",
     "author": "Lancine Doumbia",
-    "version": (0, 0, 0),
+    "version": (0, 1, 0),
     "blender": (2, 8, 0),
     "location": "View3D > Sidebar",
     "description": "Lies up the selected amount of objects along an axis",
@@ -28,8 +28,8 @@ class CoordinateProperties(bpy.types.PropertyGroup):
         )
     coord_z: bpy.props.FloatProperty(
         name="", 
-        min= -10000, 
-        max=10000,
+        min= -10000.00, 
+        max=10000.00,
         )
     x_mode: bpy.props.BoolProperty(name="", default=False)
     y_mode: bpy.props.BoolProperty(name="", default=False)
@@ -136,7 +136,7 @@ class OBJECT_PT_Panel(bpy.types.Panel):
 
     @classmethod
     def poll(cls,context):
-        return context.selected_objects 
+        return context.selected_objects and context.object.mode == "OBJECT"
 
     def draw(self, context):
         layout = self.layout
