@@ -4,7 +4,7 @@
 bl_info = {
     "name": "N Item line up",
     "author": "Lancine Doumbia",
-    "version": (1, 0, 0),
+    "version": (1, 0, 1),
     "blender": (2, 8, 0),
     "location": "View3D > Sidebar",
     "description": "Lies up the selected amount of objects along an axis",
@@ -98,32 +98,19 @@ class OBJECT_OT_Align_Axes(bpy.types.Operator):
             
             if prop_ref.x_mode:
                 obj_.location.x = prop_ref.coord_x
-                print("Name: {} X({})".format(obj_.name, obj_.location.x))  
-            else:
-                obj_.location.x
-                print("Name: {} X({})".format(obj_.name, obj_.location.x))  
-                
+                print("Name: {} X({})".format(obj_.name, obj_.location.x)) 
                 
             if prop_ref.y_mode:
                 obj_.location.y = prop_ref.coord_y
                 print("Name: {} Y({})".format(obj_.name, obj_.location.y))
-            else:
-                obj_.location.y
-                print("Name: {} Y({})".format(obj_.name, obj_.location.y))
-            
-            
+           
             if prop_ref.z_mode:
                 obj_.location.z = prop_ref.coord_z
                 print("Name: {} Z({})".format(obj_.name, obj_.location.z))
-            else:
-                obj_.location.z   
-                print("Name: {} Z({})".format(obj_.name, obj_.location.z))
-            
             
             print("Name: {} ({},{},{})".format(obj_.name, obj_.location.x,obj_.location.y, obj_.location.z))
             
-        
-        self.report({'INFO'}, "Status info")
+        self.report({'INFO'}, "Status: Done")
         return {"FINISHED"}
 
 
@@ -146,20 +133,20 @@ class OBJECT_PT_Panel(bpy.types.Panel):
         
         neat_row_x = neat.row(align=True)
         
-        neat_row_x.prop(prop_ref,"coord_x")
-        neat_row_x.operator("operator.activate_x_axis",text="X", depress=prop_ref.x_mode)
+        neat_row_x.prop(prop_ref, "coord_x")
+        neat_row_x.operator(OBJECT_OT_Toggle_X.bl_idname, text="X", depress=prop_ref.x_mode)
         
         neat_row_y = neat.row(align=True)
         
-        neat_row_y.prop(prop_ref,"coord_y")
-        neat_row_y.operator("operator.activate_y_axis",text="Y", depress=prop_ref.y_mode)
+        neat_row_y.prop(prop_ref, "coord_y")
+        neat_row_y.operator(OBJECT_OT_Toggle_Y.bl_idname, text="Y", depress=prop_ref.y_mode)
         
         neat_row_z = neat.row(align=True)
         
-        neat_row_z.prop(prop_ref,"coord_z")
-        neat_row_z.operator("operator.activate_z_axis",text="Z", depress=prop_ref.z_mode)
+        neat_row_z.prop(prop_ref, "coord_z")
+        neat_row_z.operator(OBJECT_OT_Toggle_Z.bl_idname, text="Z", depress=prop_ref.z_mode)
         
-        layout.operator("my_operator.my_class_name",text="Align!")
+        layout.operator(OBJECT_OT_Align_Axes.bl_idname,text="Align!")
 
 
 classes = [CoordinateProperties, OBJECT_OT_Align_Axes, OBJECT_OT_Toggle_X, OBJECT_OT_Toggle_Y, OBJECT_OT_Toggle_Z, OBJECT_PT_Panel]
