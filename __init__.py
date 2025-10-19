@@ -4,7 +4,7 @@
 bl_info = {
     "name": "N Item line up",
     "author": "Lancine Doumbia",
-    "version": (0, 1, 0),
+    "version": (1, 0, 0),
     "blender": (2, 8, 0),
     "location": "View3D > Sidebar",
     "description": "Lies up the selected amount of objects along an axis",
